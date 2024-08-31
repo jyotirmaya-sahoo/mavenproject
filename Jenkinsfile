@@ -14,46 +14,5 @@ pipeline
                 }
             }
         }
-        stage('continuousbuild')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.mavenbuild()
-                }
-            }
-        }
-        stage('continuousdeployment')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.tomcatdeploy("declarativepipelinesharedlibrary1","172.31.18.57","testap")
-                }
-            }
-        }
-        stage('continuoustesting')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.gitdownload("FunctionalTesting")
-                    cicd.runselenium("declarativepipelinesharedlibrary1")
-                }
-            }
-        }
-        stage('continuousdelivery')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.tomcatdeploy("declarativepipelinesharedlibrary1","172.31.24.82","pordap")
-                }
-            }
-        }
     }
 }
